@@ -13,16 +13,28 @@
 #define NAV  1
 #define SYM  2
 #define SYS  3
-#define RAYCAST LG(SPACE)
 
 / {
+    macros {
+        raycast: raycast {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(SPACE)>;
+        };
+        tap_tab: tap_tab {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp TAB>;
+        };
+    };
+
     behaviors {
         tab_raycast: tab_raycast {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "hold-preferred";
-            bindings = <&kp>, <&kp>;
+            bindings = <&raycast>, <&tap_tab>;
         };
     };
 
@@ -46,11 +58,11 @@
 // | SHIFT |  Z  |  X  |  C   |  V   |  B   | VOL↕  | SCR↕    |  N   |  M   |  ,    |  .   |   /   | CAPS  |
 //               | CTRL | ALT | CMD  | NAV  | ENTER |  | SPACE | SYM  | BSPC |   -   |  =   |
             bindings = <
-&kp ESC                &kp N1 &kp N2    &kp N3   &kp N4   &kp N5                       &kp N6   &kp N7   &kp N8    &kp N9    &kp N0   &kp DEL
-&kp GRAVE              &kp Q  &kp W     &kp E    &kp R    &kp T                        &kp Y    &kp U    &kp I     &kp O     &kp P    &kp BSLH
-&tab_raycast RAYCAST TAB &kp A  &kp S   &kp D    &kp F    &kp G                        &kp H    &kp J    &kp K     &kp L     &kp SEMI &kp SQT
-&kp LSHFT              &kp Z  &kp X     &kp C    &kp V    &kp B  &kp C_MUTE  &kp C_MUTE &kp N   &kp M    &kp COMMA &kp DOT   &kp FSLH &kp CLCK
-                              &kp LCTRL &kp LALT &kp LGUI &mo NAV &kp RET    &kp SPACE &mo SYM  &kp BSPC &kp MINUS &kp EQUAL
+&kp ESC              &kp N1 &kp N2    &kp N3   &kp N4   &kp N5                         &kp N6   &kp N7   &kp N8    &kp N9    &kp N0   &kp DEL
+&kp GRAVE            &kp Q  &kp W     &kp E    &kp R    &kp T                          &kp Y    &kp U    &kp I     &kp O     &kp P    &kp BSLH
+&tab_raycast 0 0     &kp A  &kp S     &kp D    &kp F    &kp G                          &kp H    &kp J    &kp K     &kp L     &kp SEMI &kp SQT
+&kp LSHFT            &kp Z  &kp X     &kp C    &kp V    &kp B  &kp C_MUTE  &kp C_MUTE  &kp N    &kp M    &kp COMMA &kp DOT   &kp FSLH &kp CLCK
+                            &kp LCTRL &kp LALT &kp LGUI &mo NAV &kp RET    &kp SPACE   &mo SYM  &kp BSPC &kp MINUS &kp EQUAL
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_SCROLL_UP C_SCROLL_DOWN>;
         };
@@ -70,7 +82,7 @@
 &trans &kp K_UNDO &kp K_CUT &kp K_COPY &kp K_PASTE &trans  &none     &none       &trans   &trans    &trans    &trans    &trans  &trans
                   &trans    &trans     &trans      &trans  &trans    &trans      &trans   &trans    &trans    &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp LG(EQUAL) LG(MINUS)>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         sym_layer {
