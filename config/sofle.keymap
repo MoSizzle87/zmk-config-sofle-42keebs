@@ -26,6 +26,16 @@
             #binding-cells = <0>;
             bindings = <&kp TAB>;
         };
+        zoom_in: zoom_in {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(EQUAL)>;
+        };
+        zoom_out: zoom_out {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(MINUS)>;
+        };
     };
 
     behaviors {
@@ -35,6 +45,11 @@
             tapping-term-ms = <200>;
             flavor = "hold-preferred";
             bindings = <&raycast>, <&tap_tab>;
+        };
+        enc_zoom: enc_zoom {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&zoom_in>, <&zoom_out>;
         };
     };
 
@@ -82,7 +97,7 @@
 &trans &kp K_UNDO &kp K_CUT &kp K_COPY &kp K_PASTE &trans  &none     &none       &trans   &trans    &trans    &trans    &trans  &trans
                   &trans    &trans     &trans      &trans  &trans    &trans      &trans   &trans    &trans    &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_zoom>;
         };
 
         sym_layer {
@@ -100,7 +115,7 @@
 &trans    &trans   &trans &trans   &trans     &trans   &trans  &trans   &trans    &trans   &trans    &trans    &trans   &trans
                    &trans &trans   &trans     &trans   &trans  &trans   &trans    &trans   &trans    &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_SCROLL_UP C_SCROLL_DOWN>;
+            sensor-bindings = <&inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN &inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
         };
 
         sys_layer {
@@ -118,7 +133,7 @@
 &none      &none        &none        &none        &none        &none        &none  &none     &none &none &none &none &none &bootloader
                         &none        &none        &none        &none        &none  &none     &none &none &none &none
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_SCROLL_UP C_SCROLL_DOWN>;
+            sensor-bindings = <&inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN &inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
         };
     };
 };
