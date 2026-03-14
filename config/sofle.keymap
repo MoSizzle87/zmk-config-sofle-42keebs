@@ -8,15 +8,20 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/ext_power.h>
+#include <dt-bindings/zmk/pointing.h>
 
 #define BASE 0
 #define NAV  1
 #define SYM  2
 #define SYS  3
-#define EURO RA(N5)
 
 / {
     macros {
+        euro: euro {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp RA(N5)>;
+        };
         zoom_in: zoom_in {
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
@@ -30,6 +35,11 @@
     };
 
     behaviors {
+        enc_scroll: enc_scroll {
+            compatible = "zmk,behavior-sensor-rotate";
+            #sensor-binding-cells = <0>;
+            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+        };
         enc_zoom: enc_zoom {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
@@ -63,20 +73,20 @@
 &kp LSHFT &kp Z  &kp X     &kp C    &kp V    &kp B  &kp C_MUTE  &kp C_MUTE &kp N    &kp M    &kp COMMA &kp DOT   &kp FSLH &kp CLCK
                  &kp LCTRL &kp LALT &kp LGUI &mo NAV &kp RET    &kp SPACE  &mo SYM  &kp BSPC &kp MINUS &kp EQUAL
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_scroll>;
         };
 
         nav_layer {
             display-name = "nav";
 // ------------------------------------------------------------------------------------------------------------
 // |       |  F1  |  F2  |  F3  |  F4  |  F5  |                   |  F6  |  F7   |  F8   |  F9  |  F10  |  F11  |
-// |       | INS  | PSCR | GUI  |      |      |                   | HOME | PGDN  | PGUP  | END  |       |  F12  |
+// |       | INS  | PSCRN| GUI  |      |      |                   | HOME | PGDN  | PGUP  | END  |       |  F12  |
 // |       |      |      |      |      |      |                   | LEFT | DOWN  |  UP   | RIGHT|       |       |
-// |       | UNDO | CUT  | COPY |PASTE |      | &none | &none    |      |       |       |      |       |       |
+// |       | UNDO | CUT  | COPY |PASTE |      | &none | ZOOM↕   |      |       |       |      |       |       |
 //                |      |      |      |      |       |           |      |       |       |      |
             bindings = <
 &trans &kp F1     &kp F2    &kp F3     &kp F4      &kp F5                        &kp F6   &kp F7    &kp F8    &kp F9    &kp F10 &kp F11
-&trans &kp INS    &kp PSCR  &kp LGUI   &trans      &trans                        &kp HOME &kp PG_DN &kp PG_UP &kp END   &trans  &kp F12
+&trans &kp INS    &kp PSCRN &kp LGUI   &trans      &trans                        &kp HOME &kp PG_DN &kp PG_UP &kp END   &trans  &kp F12
 &trans &trans     &trans    &trans     &trans      &trans                        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &trans  &trans
 &trans &kp K_UNDO &kp K_CUT &kp K_COPY &kp K_PASTE &trans  &none     &none       &trans   &trans    &trans    &trans    &trans  &trans
                   &trans    &trans     &trans      &trans  &trans    &trans      &trans   &trans    &trans    &trans
@@ -94,12 +104,12 @@
 //               |      |       |      |      |        |  |       |      |      |       |      |
             bindings = <
 &kp TILDE &kp EXCL &kp AT &kp HASH &kp DLLR  &kp PRCNT                 &kp CARET &kp AMPS &kp ASTRK &kp LPAR  &kp RPAR &kp PIPE
-&trans    &trans   &trans &trans   &kp EURO  &trans                    &kp LBRC  &kp RBRC &kp LBKT  &kp RBKT  &trans   &trans
+&trans    &trans   &trans &trans   &euro     &trans                    &kp LBRC  &kp RBRC &kp LBKT  &kp RBKT  &trans   &trans
 &trans    &trans   &trans &trans   &trans    &trans                    &kp UNDER &kp PLUS &kp SEMI  &kp COLON &trans   &trans
 &trans    &trans   &trans &trans   &trans    &trans   &trans  &trans   &trans    &trans   &trans    &trans    &trans   &trans
                    &trans &trans   &trans    &trans   &trans  &trans   &trans    &trans   &trans    &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_scroll>;
         };
 
         sys_layer {
@@ -117,7 +127,7 @@
 &none      &none        &none        &none        &none        &none        &none  &none     &none &none &none &none &none &bootloader
                         &none        &none        &none        &none        &none  &none     &none &none &none &none
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_scroll>;
         };
     };
 };
