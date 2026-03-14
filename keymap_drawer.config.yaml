@@ -1,0 +1,26 @@
+draw_config:
+  key_w: 60.0
+  key_h: 56.0
+  split_gap: 30.0
+  key_rx: 6.0
+  key_ry: 6.0
+  n_columns: 1
+  dark_mode: auto
+  svg_extra_style: |
+    svg.keymap {
+      font-family: Ubuntu Mono, Inconsolata, Consolas, monospace;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+parse_config:
+  raw_binding_map:
+    "&bootloader": "BOOT"
+    "&caps_word": "CAPS\nWORD"
+  zmk_keycode_map:
+    C_VOL_UP: "Vol+"
+    C_VOL_DN: "Vol-"
+    C_MUTE: "Mute"
+    C_PP: "Play"
+    C_NEXT: "Next"
+    C_PREV: "Prev"
