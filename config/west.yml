@@ -1,11 +1,11 @@
 manifest:
   remotes:
-    - name: piit79
-      url-base: https://github.com/piit79
+    - name: zmkfirmware
+      url-base: https://github.com/zmkfirmware
   projects:
     - name: zmk
-      remote: piit79
-      revision: v0.3
+      remote: zmkfirmware
+      revision: main
       import: app/west.yml
   self:
     path: config
