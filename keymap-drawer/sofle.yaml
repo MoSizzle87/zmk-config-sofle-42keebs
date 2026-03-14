@@ -1,0 +1,182 @@
+layout: {zmk_keyboard: sofle}
+layers:
+  base:
+  - [ESC, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', DEL]
+  - [GRAVE, Q, W, E, R, T, Y, U, I, O, P, BSLH]
+  - - {t: TAB, h: Gui+SPACE}
+    - A
+    - S
+    - D
+    - F
+    - G
+    - H
+    - J
+    - K
+    - L
+    - SEMI
+    - SQT
+  - - {t: LSHFT, h: LSHFT}
+    - Z
+    - X
+    - C
+    - V
+    - B
+    - Mute
+    - Mute
+    - N
+    - M
+    - COMMA
+    - DOT
+  - [FSLH, 'CAPS
+
+      WORD', LCTRL, LALT, LGUI, nav, RET, SPACE, sym, BSPC, MINUS, EQUAL]
+  nav:
+  - - {t: ▽, type: trans}
+    - F1
+    - F2
+    - F3
+    - F4
+    - F5
+    - F6
+    - F7
+    - F8
+    - F9
+    - F10
+    - F11
+  - - {t: ▽, type: trans}
+    - INS
+    - PSCRN
+    - LGUI
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - HOME
+    - PG DN
+    - PG UP
+    - END
+    - {t: ▽, type: trans}
+    - F12
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - LEFT
+    - DOWN
+    - UP
+    - RIGHT
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+  - - {t: ▽, type: trans}
+    - UNDO
+    - CUT
+    - COPY
+    - PASTE
+    - {t: ▽, type: trans}
+    - ''
+    - ''
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {type: held}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+  sym:
+  - - TILDE
+    - EXCL
+    - AT
+    - HASH
+    - DLLR
+    - PRCNT
+    - CARET
+    - AMPS
+    - ASTRK
+    - PIPE
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - '&euro'
+    - {t: ▽, type: trans}
+    - LPAR
+    - RPAR
+    - LBRC
+    - RBRC
+    - LBKT
+    - RBKT
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - LT
+    - GT
+    - EQUAL
+    - PLUS
+    - UNDER
+    - {t: ▽, type: trans}
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+  - - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {type: held}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+    - {t: ▽, type: trans}
+  sys:
+  - - BT CLR
+    - {t: BT, h: '0'}
+    - {t: BT, h: '1'}
+    - {t: BT, h: '2'}
+    - {t: BT, h: '3'}
+    - {t: BT, h: '4'}
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+    - ''
+  - ['', '', '', '', '', '', '', '', '', '', '', '']
+  - ['', '', '', '', '', '', '', '', '', '', '', '']
+  - ['', '', '', '', '', '', '', '', '', '', '', '']
+  - - ''
+    - BOOT
+    - ''
+    - ''
+    - ''
+    - {type: held}
+    - ''
+    - ''
+    - {type: held}
+    - ''
+    - ''
+    - ''
