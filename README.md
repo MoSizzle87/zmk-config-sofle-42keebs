@@ -41,13 +41,16 @@ zmk-config-sofle/
 │   ├── sofle.keymap              # Keymap principal
 │   ├── sofle.conf                # Configuration hardware
 │   └── west.yml                  # Manifest ZMK (source du firmware)
+│
 ├── keymap-drawer/
 │   ├── sofle.svg                 # Diagramme généré automatiquement
 │   └── sofle.yaml                # Intermédiaire parsé
+│
 ├── .github/
 │   └── workflows/
 │       ├── build.yml             # Compilation du firmware
 │       └── draw-keymaps.yml      # Génération du diagramme
+│
 ├── build.yaml                    # Cibles de compilation (board + shields)
 ├── keymap_drawer.config.yaml     # Config du diagramme
 └── README.md
