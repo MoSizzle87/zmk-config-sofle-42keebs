@@ -36,6 +36,7 @@ Personal ZMK firmware configuration for my **Sofle RGB V3** wireless split keybo
 
 ## Structure du repo
 
+```
 zmk-config-sofle/
 ├── config/
 │   ├── sofle.keymap              # Keymap principal
@@ -54,7 +55,7 @@ zmk-config-sofle/
 ├── build.yaml                    # Cibles de compilation (board + shields)
 ├── keymap_drawer.config.yaml     # Config du diagramme
 └── README.md
-
+```
 
 ## Modifier le keymap
 
