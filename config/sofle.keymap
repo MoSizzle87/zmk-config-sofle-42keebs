@@ -36,6 +36,26 @@
             #binding-cells = <0>;
             bindings = <&kp LG(MINUS)>;
         };
+        m_undo: m_undo {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(Z)>;
+        };
+        m_cut: m_cut {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(X)>;
+        };
+        m_copy: m_copy {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(C)>;
+        };
+        m_paste: m_paste {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&kp LG(V)>;
+        };
     };
 
     behaviors {
@@ -88,14 +108,14 @@
 // |       |  F1  |  F2  |  F3  |  F4  |  F5  |                   |  F6  |  F7   |  F8   |  F9  |  F10  |  F11  |
 // |       | INS  | PSCR | GUI  |      |      |                   | HOME | PGDN  | PGUP  | END  |       |  F12  |
 // |       |      |      |      |      |      |                   | LEFT | DOWN  |  UP   | RIGHT|       |       |
-// |       | UNDO | CUT  | COPY |PASTE |      | &none | &none    |      |       |       |      |       |       |
+// |       | UNDO | CUT  | COPY |PASTE |      |       |          |      |       |       |      |       |       |
 //                |      |      |      |      |       |           |      |       |       |      |
             bindings = <
-&trans &kp F1     &kp F2    &kp F3     &kp F4      &kp F5                        &kp F6   &kp F7    &kp F8    &kp F9    &kp F10 &kp F11
-&trans &kp INS    &kp PSCRN &kp LGUI   &trans      &trans                        &kp HOME &kp PG_DN &kp PG_UP &kp END   &trans  &kp F12
-&trans &trans     &trans    &trans     &trans      &trans                        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &trans  &trans
-&trans &kp K_UNDO &kp K_CUT &kp K_COPY &kp K_PASTE &trans  &none     &none       &trans   &trans    &trans    &trans    &trans  &trans
-                  &trans    &trans     &trans      &trans  &trans    &trans      &trans   &trans    &trans    &trans
+&trans &kp F1  &kp F2    &kp F3   &kp F4   &kp F5                        &kp F6   &kp F7    &kp F8    &kp F9    &kp F10 &kp F11
+&trans &kp INS &kp PSCRN &kp LGUI &trans   &trans                        &kp HOME &kp PG_DN &kp PG_UP &kp END   &trans  &kp F12
+&trans &trans  &trans    &trans   &trans   &trans                        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &trans  &trans
+&trans &m_undo &m_cut    &m_copy  &m_paste &trans  &none     &none       &trans   &trans    &trans    &trans    &trans  &trans
+              &trans    &trans   &trans   &trans  &trans    &trans      &trans   &trans    &trans    &trans
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_zoom>;
         };
@@ -115,7 +135,7 @@
 &trans    &trans   &trans &trans   &trans     &trans   &trans  &trans   &trans    &trans   &trans    &trans    &trans   &trans
                    &trans &trans   &trans     &trans   &trans  &trans   &trans    &trans   &trans    &trans
             >;
-            sensor-bindings = <&inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN &inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
 
         sys_layer {
@@ -133,7 +153,7 @@
 &none      &none        &none        &none        &none        &none        &none  &none     &none &none &none &none &none &bootloader
                         &none        &none        &none        &none        &none  &none     &none &none &none &none
             >;
-            sensor-bindings = <&inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN &inc_dec_kp K_SCROLL_UP K_SCROLL_DOWN>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_VOL_UP C_VOL_DN>;
         };
     };
 };
