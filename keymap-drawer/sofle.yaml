@@ -27,7 +27,7 @@ layers:
     - M
     - ','
     - .
-  - [FSLH, '⇪
+  - [/, '⇪
 
       WORD', ⌃, ⌥, ⌘, nav, ↩, SPACE, sym, ⌫, '-', '=']
   nav:
@@ -44,8 +44,8 @@ layers:
     - F10
     - F11
   - - {t: ▽, type: trans}
-    - INS
-    - PSCRN
+    - Ins
+    - ⎙
     - ⌘
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
@@ -61,17 +61,17 @@ layers:
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
-    - LEFT
-    - DOWN
-    - UP
-    - RIGHT
+    - ←
+    - ↓
+    - ↑
+    - →
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
   - - {t: ▽, type: trans}
-    - UNDO
-    - CUT
-    - COPY
-    - PASTE
+    - ↩
+    - ✂
+    - ⎘
+    - ⎗
     - {t: ▽, type: trans}
     - ''
     - ''
@@ -108,7 +108,7 @@ layers:
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
     - {t: ▽, type: trans}
-    - '&euro'
+    - €
     - {t: ▽, type: trans}
     - (
     - )
