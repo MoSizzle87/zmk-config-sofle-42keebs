@@ -9,7 +9,7 @@ draw_config:
   svg_extra_style: |
     svg.keymap {
       font-family: Ubuntu Mono, Inconsolata, Consolas, monospace;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
     }
 
@@ -17,6 +17,9 @@ parse_config:
   raw_binding_map:
     "&bootloader": "BOOT"
     "&caps_word": "⇪\nWORD"
+    "&euro": "€"
+    "&zoom_in": "Zoom+"
+    "&zoom_out": "Zoom-"
   zmk_keycode_map:
     # Modificateurs
     LGUI: "⌘"
@@ -34,6 +37,22 @@ parse_config:
     RET: "↩"
     ESC: "⎋"
     CLCK: "⇪"
+    PSCRN: "⎙"
+    INS: "Ins"
+    # Navigation
+    LEFT: "←"
+    RIGHT: "→"
+    UP: "↑"
+    DOWN: "↓"
+    PG_UP: "PgUp"
+    PG_DN: "PgDn"
+    HOME: "⇱"
+    END: "⇲"
+    # Raccourcis
+    K_UNDO: "↩"
+    K_CUT: "✂"
+    K_COPY: "⎘"
+    K_PASTE: "⎗"
     # Média
     C_VOL_UP: "♪+"
     C_VOL_DN: "♪-"
@@ -42,11 +61,11 @@ parse_config:
     C_NEXT: "⏭"
     C_PREV: "⏮"
     # Ponctuation et symboles
+    FSLH: "/"
     MINUS: "-"
     PLUS: "+"
     EQUAL: "="
     UNDER: "_"
-    SLASH: "/"
     BSLH: "\\"
     PIPE: "|"
     TILDE: "~"
@@ -74,11 +93,5 @@ parse_config:
     COMMA: ","
     DOT: "."
     QMARK: "?"
-    # Navigation
-    PG_UP: "PgUp"
-    PG_DN: "PgDn"
-    HOME: "⇱"
-    END: "⇲"
     # Bluetooth
     BT_CLR: "BT\nClr"
-    BT_SEL: "BT"
