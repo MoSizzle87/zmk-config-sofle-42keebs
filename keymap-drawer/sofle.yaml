@@ -27,9 +27,20 @@ layers:
     - M
     - ','
     - .
-  - [/, '⇪
+  - - /
+    - {t: '⇪
 
-      WORD', ⌃, ⌥, ⌘, nav, ↩, SPACE, sym, ⌫, '-', '=']
+        WORD', h: ⇧}
+    - ⌃
+    - ⌥
+    - ⌘
+    - nav
+    - ↩
+    - SPACE
+    - sym
+    - ⌫
+    - '-'
+    - '='
   nav:
   - - {t: ▽, type: trans}
     - F1
