@@ -19,14 +19,28 @@ Personal ZMK firmware configuration for my **Sofle RGB V3** wireless split keybo
 
 | Layer | Activation | Description |
 |---|---|---|
-| `BASE` | Default | QWERTY, hold-tap sur TAB (Raycast), sticky shift gauche |
+| `BASE` | Default | QWERTY, tap-hold sur plusieurs touches, sticky shift gauche |
 | `NAV` | Maintenir NAV | Navigation HJKL, F1-F12, raccourcis macOS |
 | `SYM` | Maintenir SYM | Symboles de code, parenthèses, opérateurs |
 | `SYS` | NAV + SYM | Bluetooth, bootloader |
 
 ### Points notables
 
-- **TAB** : tap = Tab, hold = CMD+Space (Raycast)
+#### Tap-Hold (une touche, deux actions)
+
+| Touche | Tap | Hold |
+|--------|-----|------|
+| `TAB` | Tab | `CTRL+Space` — tmux leader |
+| `CMD` (pouce gauche) | `CMD+Space` — Raycast | CMD normal |
+| `C` | c | `CMD+C` — Copier |
+| `V` | v | `CMD+V` — Coller |
+| `Z` | z | `CMD+TAB` — Switcher d'application |
+| `X` | x | `CMD+~` — Switcher de fenêtre (même app) |
+
+> Les touches `C`, `V`, `Z`, `X` utilisent `require-prior-idle-ms = 150ms` pour éviter les faux positifs en frappe rapide.
+
+#### Autres comportements
+
 - **SHIFT gauche** : tap = Sticky Shift, hold = Shift normal
 - **SHIFT droit** : Caps Lock
 - **CAPS** : Caps Word (majuscules pour un mot entier)
