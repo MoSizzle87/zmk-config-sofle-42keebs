@@ -1,14 +1,17 @@
 /*
  * Copyright (c) 2020 The ZMK Contributors
- *
  * SPDX-License-Identifier: MIT
+ *
+ * Adapté pour Arch Linux / Hyprland
+ * Molette G = Volume  → XF86AudioRaiseVolume / LowerVolume
+ * Molette D (BASE/SYM/SYS) = Luminosité → XF86MonBrightnessUp / Down
+ * Molette D (NAV)           = PG_UP / PG_DN
  */
 
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/ext_power.h>
-#include <dt-bindings/zmk/pointing.h>
 
 #define BASE 0
 #define NAV  1
@@ -21,16 +24,6 @@
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
             bindings = <&kp RA(N5)>;
-        };
-        zoom_in: zoom_in {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(EQUAL)>;
-        };
-        zoom_out: zoom_out {
-            compatible = "zmk,behavior-macro";
-            #binding-cells = <0>;
-            bindings = <&kp LG(MINUS)>;
         };
     };
 
@@ -49,19 +42,20 @@
             flavor = "balanced";
             bindings = <&kp>, <&caps_word>;
         };
-        enc_scroll: enc_scroll {
+
+        // ── Encodeurs ─────────────────────────────────────────────────
+        enc_bright: enc_bright {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&msc SCRL_UP>, <&msc SCRL_DOWN>;
+            bindings = <&kp C_BRI_UP>, <&kp C_BRI_DN>;
         };
-        enc_zoom: enc_zoom {
+        enc_pgupdn: enc_pgupdn {
             compatible = "zmk,behavior-sensor-rotate";
             #sensor-binding-cells = <0>;
-            bindings = <&zoom_in>, <&zoom_out>;
+            bindings = <&kp PG_UP>, <&kp PG_DN>;
         };
 
-        // ── Nouveaux tap-hold ──────────────────────────────────────────
-        // TAB : tap = Tab, hold = CTRL+Space (tmux leader)
+        // ── Tap-hold ──────────────────────────────────────────────────
         tab_tmux: tab_tmux {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -69,7 +63,6 @@
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
-        // CMD (pouce) : tap = CMD+Space (Raycast), hold = CMD
         cmd_ray: cmd_raycast {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -77,7 +70,6 @@
             flavor = "balanced";
             bindings = <&kp>, <&kp>;
         };
-        // C : tap = c, hold = CMD+C (copier)
         c_copy: c_copy {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -86,7 +78,6 @@
             flavor = "tap-unless-interrupted";
             bindings = <&kp>, <&kp>;
         };
-        // V : tap = v, hold = CMD+V (coller)
         v_paste: v_paste {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -95,7 +86,6 @@
             flavor = "tap-unless-interrupted";
             bindings = <&kp>, <&kp>;
         };
-        // Z : tap = z, hold = CMD+TAB (switcher app)
         z_appsw: z_appsw {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -104,7 +94,6 @@
             flavor = "tap-unless-interrupted";
             bindings = <&kp>, <&kp>;
         };
-        // X : tap = x, hold = CMD+GRAVE (switcher fenêtre même app)
         x_winsw: x_winsw {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -132,16 +121,17 @@
 // |  ESC  |  1  |  2  |  3   |  4   |  5   |                   |  6   |  7   |  8    |  9   |   0   |  DEL  |
 // |  `/~  |  Q  |  W  |  E   |  R   |  T   |                   |  Y   |  U   |  I    |  O   |   P   |  \/|  |
 // |TAB/TUX|  A  |  S  |  D   |  F   |  G   |                   |  H   |  J   |  K    |  L   |   ;   |   '   |
-// |SK/SFT |Z/SW |X/WSW|C/CPY |V/PST |  B   | VOL↕  | SCR↕    |  N   |  M   |  ,    |  .   |   /   |SFT/CW |
+// |SK/SFT |Z/SW |X/WSW|C/CPY |V/PST |  B   | VOL↕  | BRI↕    |  N   |  M   |  ,    |  .   |   /   |SFT/CW |
 //               | CTRL | ALT |CMD/RCT| NAV  | ENTER |  | SPACE | SYM  | BSPC |   -   |  =   |
-            bindings = <
-&kp ESC                &kp N1                    &kp N2    &kp N3   &kp N4               &kp N5                        &kp N6   &kp N7   &kp N8    &kp N9    &kp N0      &kp DEL
-&kp GRAVE              &kp Q                     &kp W     &kp E    &kp R                &kp T                         &kp Y    &kp U    &kp I     &kp O     &kp P       &kp BSLH
-&tab_tmux LC(SPACE) TAB &kp A                    &kp S     &kp D    &kp F                &kp G                         &kp H    &kp J    &kp K     &kp L     &kp SEMI    &kp SQT
-&sk_shift LSHFT LSHFT  &z_appsw LG(TAB) Z        &x_winsw LG(GRAVE) X &c_copy LG(C) C &v_paste LG(V) V &kp B  &kp C_MUTE  &kp C_MUTE &kp N    &kp M    &kp COMMA &kp DOT   &kp FSLH    &shift_cw RSHFT 0
-                              &kp LCTRL &kp LALT &cmd_ray LGUI LG(SPACE) &mo NAV &kp RET    &kp SPACE  &mo SYM  &kp BSPC &kp MINUS &kp EQUAL
+            bindings = 
+&kp ESC                 &kp N1               &kp N2                &kp N3           &kp N4           &kp N5                              &kp N6  &kp N7  &kp N8     &kp N9   &kp N0    &kp DEL
+&kp GRAVE               &kp Q                &kp W                 &kp E            &kp R            &kp T                               &kp Y   &kp U   &kp I      &kp O    &kp P     &kp BSLH
+&tab_tmux LC(SPACE) TAB &kp A                &kp S                 &kp D            &kp F            &kp G                               &kp H   &kp J   &kp K      &kp L    &kp SEMI  &kp SQT
+&sk_shift LSHFT LSHFT   &z_appsw LG(TAB) Z  &x_winsw LG(GRAVE) X  &c_copy LG(C) C  &v_paste LG(V) V &kp B   &kp C_MUTE  &kp C_MUTE     &kp N   &kp M   &kp COMMA  &kp DOT  &kp FSLH  &shift_cw RSHFT 0
+                         &kp LCTRL           &kp LALT              &cmd_ray LGUI LG(SPACE) &mo NAV  &kp RET   &kp SPACE   &mo SYM  &kp BSPC  &kp MINUS  &kp EQUAL
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_scroll>;
+            // G: Volume   D: Luminosité
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_bright>;
         };
 
         nav_layer {
@@ -150,16 +140,17 @@
 // |       |  F1  |  F2  |  F3  |  F4  |  F5  |                   |  F6  |  F7   |  F8   |  F9  |  F10  |  F11  |
 // |       | INS  | PSCRN| GUI  |      |      |                   | HOME | PGDN  | PGUP  | END  |       |  F12  |
 // |       |      |      |      |      |      |                   | LEFT | DOWN  |  UP   | RIGHT|       |       |
-// |       | UNDO | CUT  | COPY |PASTE |      | &none | ZOOM↕   |      |       |       |      |       |       |
-//                |      |      |      |      |       |           |      |       |       |      |
-            bindings = <
-&trans &kp F1     &kp F2    &kp F3     &kp F4      &kp F5                        &kp F6   &kp F7    &kp F8    &kp F9    &kp F10 &kp F11
-&trans &kp INS    &kp PSCRN &kp LGUI   &trans      &trans                        &kp HOME &kp PG_DN &kp PG_UP &kp END   &trans  &kp F12
-&trans &trans     &trans    &trans     &trans      &trans                        &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &trans  &trans
-&trans &kp K_UNDO &kp K_CUT &kp K_COPY &kp K_PASTE &trans  &none     &none       &trans   &trans    &trans    &trans    &trans  &trans
-                  &trans    &trans     &trans      &trans  &trans    &trans      &trans   &trans    &trans    &trans
+// |       | UNDO | CUT  | COPY |PASTE |      | VOL↕  | PGUP↕   |      |       |       |      |       |       |
+//                |      |      |      |      |        |          |      |       |       |      |
+            bindings = 
+&trans &kp F1     &kp F2    &kp F3     &kp F4      &kp F5                          &kp F6   &kp F7    &kp F8    &kp F9    &kp F10 &kp F11
+&trans &kp INS    &kp PSCRN &kp LGUI   &trans      &trans                          &kp HOME &kp PG_DN &kp PG_UP &kp END   &trans  &kp F12
+&trans &trans     &trans    &trans     &trans      &trans                          &kp LEFT &kp DOWN  &kp UP    &kp RIGHT &trans  &trans
+&trans &kp K_UNDO &kp K_CUT &kp K_COPY &kp K_PASTE &trans   &none      &none       &trans   &trans    &trans    &trans    &trans  &trans
+                  &trans    &trans     &trans      &trans   &trans     &trans      &trans   &trans    &trans    &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_zoom>;
+            // G: Volume   D: PG_UP / PG_DN
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_pgupdn>;
         };
 
         sym_layer {
@@ -168,16 +159,17 @@
 // |  ~   |  !   |  @   |   #   |  $   |  %   |                   |  ^   |  &   |   *   |  |   |       |     |
 // |      |      |      |       |  €   |      |                   |  (   |  )   |   {   |  }   |   [   |  ]  |
 // |      |      |      |       |      |      |                   |  <   |  >   |   =   |  +   |   _   |     |
-// |      |      |      |       |      |      |        |  |       |      |      |       |      |       |     |
-//               |      |       |      |      |        |  |       |      |      |       |      |
-            bindings = <
-&kp TILDE &kp EXCL &kp AT &kp HASH &kp DLLR  &kp PRCNT                 &kp CARET &kp AMPS &kp ASTRK &kp PIPE  &trans   &trans
-&trans    &trans   &trans &trans   &euro     &trans                    &kp LPAR  &kp RPAR &kp LBRC  &kp RBRC  &kp LBKT &kp RBKT
-&trans    &trans   &trans &trans   &trans    &trans                    &kp LT    &kp GT   &kp EQUAL &kp PLUS  &kp UNDER &trans
-&trans    &trans   &trans &trans   &trans    &trans   &trans  &trans   &trans    &trans   &trans    &trans    &trans   &trans
-                   &trans &trans   &trans    &trans   &trans  &trans   &trans    &trans   &trans    &trans
+// |      |      |      |       |      |      | VOL↕  | BRI↕     |      |      |       |      |       |     |
+//               |      |       |      |      |        |          |      |      |       |      |
+            bindings = 
+&kp TILDE &kp EXCL &kp AT &kp HASH &kp DLLR &kp PRCNT                   &kp CARET &kp AMPS &kp ASTRK &kp PIPE  &trans    &trans
+&trans    &trans   &trans &trans   &euro    &trans                      &kp LPAR  &kp RPAR &kp LBRC  &kp RBRC  &kp LBKT  &kp RBKT
+&trans    &trans   &trans &trans   &trans   &trans                      &kp LT    &kp GT   &kp EQUAL &kp PLUS  &kp UNDER &trans
+&trans    &trans   &trans &trans   &trans   &trans   &trans   &trans    &trans    &trans   &trans    &trans    &trans    &trans
+                   &trans &trans   &trans   &trans   &trans   &trans    &trans    &trans   &trans    &trans
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_scroll>;
+            // G: Volume   D: Luminosité
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_bright>;
         };
 
         sys_layer {
@@ -186,16 +178,17 @@
 // | BTCLR | BT1  | BT2  |  BT3  |  BT4  |  BT5  |                |      |      |       |      |       |       |
 // |       |      |      |       |       |       |                |      |      |       |      |       |       |
 // |       |      |      |       |       |       |                |      |      |       |      |       |       |
-// |       |      |      |       |       |       | &none |  |     |      |      |       |      |       | BOOT  |
-//                |      |       |       |       |       |  |     |      |      |       |      |
-            bindings = <
-&bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                &none &none &none &none &none &none
-&none      &none        &none        &none        &none        &none                        &none &none &none &none &none &none
-&none      &none        &none        &none        &none        &none                        &none &none &none &none &none &none
-&none      &none        &none        &none        &none        &none        &none  &none     &none &none &none &none &none &bootloader
-                        &none        &none        &none        &none        &none  &none     &none &none &none &none
+// |       |      |      |       |       |       | VOL↕  | BRI↕  |      |      |       |      |       | BOOT  |
+//                |      |       |       |       |        |       |      |      |       |      |
+            bindings = 
+&bt BT_CLR &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4                  &none &none &none &none &none &none
+&none      &none        &none        &none        &none        &none                          &none &none &none &none &none &none
+&none      &none        &none        &none        &none        &none                          &none &none &none &none &none &none
+&none      &none        &none        &none        &none        &none        &none   &none      &none &none &none &none &none &bootloader
+                        &none        &none        &none        &none        &none   &none      &none &none &none &none
             >;
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_scroll>;
+            // G: Volume   D: Luminosité
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &enc_bright>;
         };
     };
 };
